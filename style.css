@@ -215,7 +215,8 @@ h1 {
 }
 
 .review-card {
-  min-width: calc((100% - 40px) / 3);
+  width: 30%;
+  min-width: 30%;
   flex-shrink: 0;
   border-radius: 16px;
   overflow: hidden;
