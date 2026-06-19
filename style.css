@@ -545,13 +545,12 @@ h1 {
   .nav-links {
     display: flex;
     flex-direction: row;
-    gap: 16px;
+    gap: 12px;
     align-items: center;
     padding: 0;
     margin: 0;
-    overflow-x: auto; /* allow horizontal scrolling if items overflow */
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* firefox */
+    flex-wrap: wrap; /* allow wrapping to next line in portrait */
+    justify-content: flex-end;
   }
 
   /* hide scrollbar visually on webkit */
@@ -559,6 +558,15 @@ h1 {
 
   .nav-links li {
     white-space: nowrap;
+  }
+
+  /* If the viewport is very narrow (<= 360px), keep horizontal scroll instead of wrapping */
+  @media (max-width: 360px) {
+    .nav-links {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 
   /* keep dropdown as absolute but adjust its placement so it doesn't push layout */
