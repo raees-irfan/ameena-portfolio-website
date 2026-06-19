@@ -18,6 +18,33 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+/* HAMBURGER (hidden on desktop; simple styled hamburger on mobile) */
+.hamburger {
+  display: none; /* hide by default (removes small unstyled box on desktop) */
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #000;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block; /* show hamburger on small screens */
+    position: relative;
+    z-index: 1100;
+  }
+}
+
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -506,37 +533,54 @@ h1 {
 
 /* MOBILE */
 @media (max-width: 768px) {
+  /* Keep header horizontal on mobile: logo on left, nav scrolls horizontally on right */
   .navbar {
-    flex-direction: column;
-    text-align: center;
-    padding: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 12px;
   }
 
   .nav-links {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
     align-items: center;
-    gap: 15px;
-    padding: 15px 0;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto; /* allow horizontal scrolling if items overflow */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* firefox */
   }
 
+  /* hide scrollbar visually on webkit */
+  .nav-links::-webkit-scrollbar { display: none; }
+
+  .nav-links li {
+    white-space: nowrap;
+  }
+
+  /* keep dropdown as absolute but adjust its placement so it doesn't push layout */
   .dropdown-menu {
-    position: static;
-    box-shadow: none;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    max-height: 0;
-    overflow: hidden;
-    padding: 0;
-    transition: max-height 0.3s ease;
-    background: #fefaf6;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    background: #fff;
     border-radius: 8px;
+    min-width: 180px;
+    z-index: 1001;
   }
 
   .dropdown.open .dropdown-menu {
-    max-height: 300px;
-    padding: 8px 0;
-    margin-top: 10px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   .dropdown-menu li a {
