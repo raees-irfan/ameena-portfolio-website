@@ -538,20 +538,27 @@ h1 {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 16px;
+    padding: 10px 12px;
     gap: 12px;
+    width: 100%; /* ensure it spans full viewport */
+  }
+
+  .logo {
+    flex: 0 0 auto; /* keep logo at its natural size */
+    max-width: 45%;
   }
 
   .nav-links {
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: 14px;
     align-items: center;
     padding: 0;
     margin: 0;
     flex-wrap: wrap; /* allow wrapping to next line in portrait */
-    justify-content: center;
+    justify-content: space-between; /* spread links across remaining space */
     flex: 1 1 auto; /* take remaining space so right side isn't empty */
+    min-width: 0; /* prevent overflowing due to long items */
   }
 
   /* hide scrollbar visually on webkit */
