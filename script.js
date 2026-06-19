@@ -142,5 +142,29 @@ document.addEventListener('DOMContentLoaded', function () {
     buildDots();
     goTo(0);
   }
+  // SERVICES DROPDOWN — tap-to-toggle for mobile/touch devices
+document.addEventListener('DOMContentLoaded', function () {
+  const dropdown = document.querySelector('.nav-links li.dropdown');
+  if (!dropdown) return;
+
+  const trigger = dropdown.querySelector(':scope > a');
+
+  trigger.addEventListener('click', function (e) {
+    // Only intercept tap-to-toggle behavior on small screens (touch devices).
+    // On desktop, hover (handled in CSS) already shows the menu, so let the
+    // link behave normally (e.g. jump to #services).
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      dropdown.classList.toggle('open');
+    }
+  });
+
+  // Close the dropdown if the user taps anywhere else on the page
+  document.addEventListener('click', function (e) {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('open');
+    }
+  });
+});
 
 });
